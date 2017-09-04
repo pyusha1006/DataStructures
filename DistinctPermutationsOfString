@@ -1,0 +1,33 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class StringPermutationExample {
+ 
+    public static void main(String[] args) {
+        String input = "hlllo";
+        String input2 = "where";
+ 
+        Set<String> set = new HashSet<>();
+ 
+        permutation(input, "", set);
+        System.out.println(set);
+        set.clear();
+ 
+        permutation(input2, "", set);
+        System.out.println(set);
+    }
+ 
+    private static void permutation(String input, String sofar, Set<String> set) {
+        if (input.equals("")) {         //this becomes true when input.length becomes 0
+            set.add(sofar);             // and so it is added to the set
+        }
+        int j =0;
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (input.indexOf(c, i + 1) != -1)
+                continue;       //this i+1 helps in getting index -1 when the input.length completes
+            permutation(input.substring(0, i) + input.substring(i + 1), sofar + c, set);
+        }
+    }
+ 
+}
