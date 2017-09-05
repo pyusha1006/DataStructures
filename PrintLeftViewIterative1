@@ -1,4 +1,4 @@
-// Java program to print left view of binary tree
+// Java program to print left view of binary tree     //using Inorder traversal
 import java.util.Stack;
 /* Class containing left and right child of current
 node and key value*/
