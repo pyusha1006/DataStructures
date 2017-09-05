@@ -1,5 +1,5 @@
 // Java program to print left view of binary tree             //Using level order traversal
-import java.util.Queue;
+import java.util.Queue;						//Time Complexity: O(n)
 import java.util.LinkedList;
 /* Class containing left and right child of current
 node and key value*/
