@@ -1,0 +1,78 @@
+// Java program to print left view of binary tree
+import java.util.Stack;
+/* Class containing left and right child of current
+node and key value*/
+class Node
+{
+	int data;
+	Node left, right;
+
+	public Node(int item)
+	{
+		data = item;
+		left = right = null;
+	}
+}
+
+/* Class to print the left view */
+class BinaryTree
+{
+	Node root;
+	static int max_level = 0;
+
+	// recursive function to print left view
+	void leftViewUtil(Node node)
+	{
+		// Base Case
+		if (node==null) return;
+	//keep the nodes in the path that are waiting to be visited
+		Stack<Node> stack = new Stack<Node>();
+		
+		//first node to be visited will be the left one
+		while (node != null) {
+		    System.out.print(node.data + " ");
+			stack.push(node);
+			node = node.left;
+		}
+		
+		// traverse the tree
+		while (stack.size() > 0) {
+		    	
+			// visit the top node
+			node = stack.pop();
+			if (node.right != null) {
+				node = node.right;
+				
+				// the next node to be visited is the leftmost
+				while (node != null) {
+					stack.push(node);
+					node = node.left;
+					if(node!=null){
+					    System.out.print(node.data + " ");
+					}
+				}
+			}
+		}
+
+	}
+
+	// A wrapper over leftViewUtil()
+	void leftView()
+	{
+		leftViewUtil(root);
+	}
+
+	/* testing for example nodes */
+	public static void main(String args[])
+	{
+		/* creating a binary tree and entering the nodes */
+		BinaryTree tree = new BinaryTree();
+		tree.root = new Node(12);
+		tree.root.left = new Node(10);
+		tree.root.right = new Node(30);
+		tree.root.right.left = new Node(25);
+		tree.root.right.right = new Node(40);
+
+		tree.leftView();
+	}
+}
