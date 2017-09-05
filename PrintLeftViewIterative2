@@ -1,0 +1,84 @@
+// Java program to print left view of binary tree             //Using level order traversal
+import java.util.Queue;
+import java.util.LinkedList;
+/* Class containing left and right child of current
+node and key value*/
+class Node
+{
+	int data;
+	Node left, right;
+
+	public Node(int item)
+	{
+		data = item;
+		left = right = null;
+	}
+}
+
+/* Class to print the left view */
+class BinaryTree
+{
+	Node root;
+	static int max_level = 0;
+
+	// recursive function to print left view
+	void leftViewUtil(Node node)
+	{
+		// Base Case
+		if (node==null) return;
+		// Create an empty queue for level order tarversal
+		Queue<Node> q =new LinkedList<Node>();
+		
+		// Enqueue Root and initialize height
+		q.add(root);
+		System.out.print(root.data + " ");
+		
+		
+		while(true)
+		{
+			
+			// nodeCount (queue size) indicates number of nodes
+			// at current level.
+			int nodeCount = q.size();
+			if(nodeCount == 0)
+				break;
+			
+			// Dequeue all nodes of current level and Enqueue all
+			// nodes of next level
+			while(nodeCount > 0)
+			{
+			    node = q.peek();
+				q.remove();
+				if(node.left != null)
+					{
+					q.add(node.left);
+					System.out.print(node.left.data + " ");
+					}
+				if(node.right != null)
+					q.add(node.right);
+				nodeCount--;
+			}
+		}
+
+	}
+
+	// A wrapper over leftViewUtil()
+	void leftView()
+	{
+		leftViewUtil(root);
+	}
+
+	/* testing for example nodes */
+	public static void main(String args[])
+	{
+		/* creating a binary tree and entering the nodes */
+		BinaryTree tree = new BinaryTree();
+		tree.root = new Node(12);
+		tree.root.left = new Node(10);
+		tree.root.right = new Node(30);
+		tree.root.right.left = new Node(25);
+		tree.root.right.right = new Node(40);
+
+		tree.leftView();
+	}
+}
