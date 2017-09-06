@@ -1,4 +1,4 @@
-// Java program to print left view of binary tree     //using Inorder traversal
+							//using in-order traversal
 import java.util.Stack;					//Time Complexity: O(n)
 /* Class containing left and right child of current
 node and key value*/
@@ -17,9 +17,7 @@ class Node
 /* Class to print the left view */
 class BinaryTree
 {
-	Node root;
-	static int max_level = 0;
-
+     static Node root;
 	// recursive function to print left view
 	void leftViewUtil(Node node)
 	{
@@ -56,12 +54,6 @@ class BinaryTree
 
 	}
 
-	// A wrapper over leftViewUtil()
-	void leftView()
-	{
-		leftViewUtil(root);
-	}
-
 	/* testing for example nodes */
 	public static void main(String args[])
 	{
@@ -73,6 +65,6 @@ class BinaryTree
 		tree.root.right.left = new Node(25);
 		tree.root.right.right = new Node(40);
 
-		tree.leftView();
+		tree.leftViewUtil(root);
 	}
 }
