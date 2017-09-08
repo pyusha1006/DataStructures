@@ -1,0 +1,65 @@
+import java.util.*;                           //In-order traversal
+class Node                                    //Time complexity is O(n)
+{
+	int data;
+	Node left, right;
+	public Node(int item)
+	{
+		data = item;
+		left = right = null;
+	}
+}
+
+public class BinaryTree
+{
+	Node root;
+	Node prev;
+
+	boolean isBST() {
+		prev = null;
+		return isValidBST(root);
+	}
+
+    boolean isValidBST(Node node) {
+        if(root == null) return false;
+ 
+        Stack<Node> S = new Stack<>();
+        int first_compare = 1; 
+        
+        while(node!=null){
+        S.push(node);
+        node = node.left;
+        }
+        
+        while(!S.isEmpty()){
+                node = S.pop();
+                if(prev !=null && node.data <= prev.data){
+                    return false;
+                }
+                prev = node;
+                if (node.right != null) {
+                node = node.right;
+                 
+                while (node != null) {
+                    S.push(node);
+                    node = node.left;
+                }
+            }
+        }
+     return true;
+     }
+
+	public static void main(String args[])
+	{
+		BinaryTree tree = new BinaryTree();
+		tree.root = new Node(4);
+		tree.root.left = new Node(2);
+		tree.root.right = new Node(5);
+		tree.root.left.left = new Node(10);
+		tree.root.left.right = new Node(3);
+		if (tree.isBST())
+			System.out.println("IS BST");
+		else
+			System.out.println("Not a BST");
+	}
+}
