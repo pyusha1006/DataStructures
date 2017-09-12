@@ -1,0 +1,68 @@
+//Java implementation to find leaf count of a given Binary tree
+ import java.util.*;                                                    //Level-order traversal
+/* Class containing left and right child of current                     //Time Complexity : O(n)
+ node and key value*/
+class Node 
+{
+    int data;
+    Node left, right;
+  
+    public Node(int item) 
+    {
+        data = item;
+        left = right = null;
+    }
+}
+  
+public class BinaryTree 
+{
+    //Root of the Binary Tree
+    Node root;
+      
+    /* Function to get the count of leaf nodes in a binary tree*/
+    int getLeafCount() 
+    {
+        return getLeafCount(root);
+    }
+  
+    int getLeafCount(Node node) 
+    {
+        if (node == null)
+            return 0;
+ 
+    // Initialize empty queue.
+    Queue<Node> q = new LinkedList<Node>();
+ 
+    // Do level order traversal starting from root
+    int count = 0; // Initialize count of leaves
+    q.add(node);
+    while (!q.isEmpty())
+    {
+        Node temp = q.remove();
+ 
+        if (temp.left != null)
+            q.add(temp.left);
+        if (temp.right != null)
+            q.add(temp.right);
+        if (temp.left == null && temp.right == null)
+            count++;
+    }
+    return count;
+    }
+    
+    /* Driver program to test above functions */
+    public static void main(String args[]) 
+    {
+        /* create a tree */
+        BinaryTree tree = new BinaryTree();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+          
+        /* get leaf count of the abve tree */
+        System.out.println("The leaf count of binary tree is : "
+                             + tree.getLeafCount());
+    }
+}
