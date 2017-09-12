@@ -1,0 +1,94 @@
+// Java program to see if two trees                         //In-order Traversal
+// are mirror of each other                                 //Time Complexity: O(n)
+ import java.util.*;
+// A binary tree node
+class Node 
+{
+    int data;
+    Node left, right;
+ 
+    public Node(int data)
+    {
+        this.data = data;
+        left = right = null;
+    }
+}
+ 
+class BinaryTree 
+{
+    Node a, b;
+     
+    /* Given two trees, return true if they are
+       mirror of each other */
+    boolean areMirror(Node a, Node b) 
+    {
+        Stack<Node> st1 = new Stack<Node>();
+        Stack<Node> st2 = new Stack<Node>();
+        
+        while (true)
+    {
+        // iterative inorder traversal of 1st tree and
+        // reverse inoder traversal of 2nd tree
+        while (a!=null && b!=null)
+        {
+            // if the corresponding nodes in the two traversal
+            // have different data values, then they are not
+            // mirrors of each other.
+            if (a.data != b.data)
+                return false;
+                 
+            st1.push(a);
+            st2.push(b);
+            a = a.left;
+            b = b.right;    
+        }
+        
+         if (!(a == null && b == null))
+            return false;
+             
+        if (!st1.isEmpty() && !st2.isEmpty())
+        {
+            a = st1.pop();
+            b = st2.pop();
+             
+            /* we have visited the node and its left subtree.
+               Now, it's right subtree's turn */
+            a = a.right;
+             
+            /* we have visited the node and its right subtree.
+               Now, it's left subtree's turn */
+            b = b.left;
+        }    
+         
+        // both the trees have been completely traversed
+        else
+            break;
+    }
+    
+    // tress are mirrors of each other
+    return true;
+}
+ 
+    // Driver code to test above methods
+    public static void main(String[] args) 
+    {
+        BinaryTree tree = new BinaryTree();
+        Node a = new Node(1);
+        Node b = new Node(1);
+        a.left = new Node(2);
+        a.right = new Node(3);
+        a.left.left = new Node(4);
+        a.left.right = new Node(5);
+ 
+        b.left = new Node(3);
+        b.right = new Node(2);
+        b.right.left = new Node(5);
+        b.right.right = new Node(4);
+ 
+        if (tree.areMirror(a, b) == true)
+            System.out.println("Yes");
+        else
+            System.out.println("No");
+ 
+    }
+}
